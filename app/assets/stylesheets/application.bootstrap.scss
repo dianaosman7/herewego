@@ -1,0 +1,54 @@
+// Import Bootstrap first
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons";
+
+.lux-btn-purple {
+  background-color: #693360 !important;
+  color: white !important;
+  border: none !important;
+  
+  &:hover {
+    background-color: #8a4d68 !important;
+    color: white !important;
+  }
+}
+
+// Custom dark pink theme
+:root {
+  --lux-dark-pink: #693360;
+  --lux-pink-light: #f8e6f2;
+}
+
+body {
+  background-color: #fef9fb;
+  font-family: 'Red Hat Display', sans-serif;
+}
+
+// Custom navbar (reliable!)
+.lux-navbar {
+  background-color: var(--lux-pink-light) !important;
+  
+  .navbar-brand {
+    color: var(--lux-dark-pink) !important;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  
+  .nav-link {
+    color: var(--lux-dark-pink) !important;
+    font-weight: 600;
+    
+    &:hover {
+      color: #b0256a !important;
+      background-color: #ffe2ec;
+      border-radius: 6px;
+    }
+  }
+}
+
+// Jumbotron
+.lux-jumbotron {
+  background-color: var(--lux-pink-light);
+  padding: 3rem 0;
+  margin-bottom: 3rem;
+}
