@@ -1,6 +1,7 @@
 # README
 
 This is my pinteresting project 
+Diana osman
 
 This README would normally document whatever steps are necessary to get the
 application up and running.

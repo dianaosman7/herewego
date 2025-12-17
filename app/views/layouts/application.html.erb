@@ -12,27 +12,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= javascript_importmap_tags %>   <!-- KEEP ONLY ONE -->
   </head>
 
   <body style="font-family: 'Red Hat Display', sans-serif; background-color: var(--lux-bg);">
-    
-   
+
     <main class="container my-5">
 
-   <nav class="navbar navbar-expand-lg lux-navbar">
-      
-<%= render 'homecontrol/brand' %>
+      <nav class="navbar navbar-expand-lg lux-navbar">
 
-<%= render 'homecontrol/navbar' %>
+        <%= render 'homecontrol/brand' %>
+        <%= render 'homecontrol/navbar' %>
 
-<br/>
-<div class="container"
-      <%= yield %>
-    </div>
-    
+      </nav>
+
+      <br/>
+
+      <div class="container">
+        <%= render 'homecontrol/flashmessage' %>
+        <%= yield %>
+      </div>
+
     </main>
-    
+
   </body>
 </html>
-

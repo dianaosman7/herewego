@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header fs-2 fw-bold">
+    New Pin
+  </div>
+  <div class="card-body">
+
+    <% content_for :title, "New pin" %>
+
+
+<%= render "form", pin: @pin %>
+
+<br>
+ <div class="card-footer">
+  <%= link_to "Back to pins", pins_path %>
+  </div>
+
+
