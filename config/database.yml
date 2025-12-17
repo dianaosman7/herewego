@@ -1,3 +1,4 @@
+
 # config/database.yml
 
 default: &default
@@ -18,3 +19,11 @@ production:
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   url: <%= ENV['DATABASE_URL'] %>
+
+# Action-Cable / Solid-Cable (also uses Postgres)
+
+cable:
+  adapter: postgresql
+  url: <%= ENV['DATABASE_URL'] %>
+  pool: 5
+  timeout: 5000# bump
