@@ -1,6 +1,6 @@
 # config/database.yml
 
-
+#
 default: &default
   adapter: sqlite3
   max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
@@ -20,21 +20,25 @@ production:
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   url: <%= ENV['DATABASE_URL'] %>
 
-# Action-Cable / Solid-Cable (also uses Postgres)
-
 cable:
   adapter: postgresql
   url: <%= ENV['DATABASE_URL'] %>
   pool: 5
   timeout: 5000
 
-# Solid-Queue (job backend) – reuse the same Postgres DB
-
 queue:
   adapter: postgresql
   url: <%= ENV['DATABASE_URL'] %>
   pool: 5
-  timeout: 5000# bump
+  timeout: 5000
 
+cache:
+  adapter: postgresql
+  url: <%= ENV['DATABASE_URL'] %>
+  pool: 5
+  timeout: 5000
+
+
+#
 #
 
