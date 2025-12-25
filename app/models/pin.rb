@@ -1,12 +1,24 @@
 class Pin < ApplicationRecord
   has_one_attached :image
 
-  validates :image,
-            content_type: [
-              "image/png",
-              "image/jpeg",
-              "image/webp",
-              "application/pdf"
-            ],
-            size: { less_than: 10.megabytes }
+  validate :image_must_be_allowed_type
+
+  private
+
+  def image_must_be_allowed_type
+    return unless image.attached?
+
+    allowed = [
+      "image/png",
+      "image/jpeg",
+      "image/jpg",
+      "image/webp",
+      "image/gif",
+      "application/pdf"
+    ]
+
+    unless allowed.include?(image.blob.content_type)
+      errors.add(:image, "must be an image (png/jpg/webp/gif) or a PDF")
+    end
+  end
 end

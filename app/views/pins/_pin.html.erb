@@ -1,24 +1,24 @@
-<div id="<%= dom_id pin %>" class="pin">
+class Pin < ApplicationRecord
+  has_one_attached :image
 
-  <% if pin.image.attached? %>
-    <% if pin.image.image? %>
-      <%= image_tag(
-            pin.image.variant(resize_to_limit: [300, 300]),
-            class: "pin-thumb"
-          ) %>
-    <% else %>
-      <%= link_to "View PDF",
-            url_for(pin.image),
-            target: "_blank",
-            rel: "noopener" %>
-    <% end %>
-  <% else %>
-    <p>No file uploaded</p>
-  <% end %>
+  validate :image_must_be_allowed_type
 
-  <div>
-    <strong>Description:</strong>
-    <%= pin.description %>
-  </div>
+  private
 
-</div>
+  def image_must_be_allowed_type
+    return unless image.attached?
+
+    allowed = %w[
+      image/png
+      image/jpeg
+      image/jpg
+      image/webp
+      image/gif
+      application/pdf
+    ]
+
+    unless allowed.include?(image.blob.content_type)
+      errors.add(:image, "must be an image (png/jpg/webp/gif) or a PDF")
+    end
+  end
+end

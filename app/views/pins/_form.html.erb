@@ -18,10 +18,7 @@
 
   <div class="form-group">
     <%= f.label :image, "Upload (Image or PDF)", style: "display: block" %>
-    <%= f.file_field :image,
-          class: "form-control",
-          accept: "image/*,application/pdf" %>
-    <small class="text-muted">Accepted: JPG/PNG/WebP or PDF (max 10MB)</small>
+    <%= f.file_field :image, class: "form-control", accept: "image/*,application/pdf" %>
   </div>
 
   <div class="actions">
