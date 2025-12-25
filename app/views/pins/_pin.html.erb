@@ -1,13 +1,24 @@
-
 <div id="<%= dom_id pin %>" class="pin">
+
   <% if pin.image.attached? %>
-    <%= image_tag pin.image.variant(resize_to_limit: [300, 300]), class: "pin-thumb" %>
+    <% if pin.image.image? %>
+      <%= image_tag(
+            pin.image.variant(resize_to_limit: [300, 300]),
+            class: "pin-thumb"
+          ) %>
+    <% else %>
+      <%= link_to "View PDF",
+            url_for(pin.image),
+            target: "_blank",
+            rel: "noopener" %>
+    <% end %>
   <% else %>
-    <p>No image yet</p>
+    <p>No file uploaded</p>
   <% end %>
 
   <div>
     <strong>Description:</strong>
     <%= pin.description %>
   </div>
+
 </div>
