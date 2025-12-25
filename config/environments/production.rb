@@ -1,4 +1,8 @@
 require "active_support/core_ext/integer/time"
+##
+
+##
+
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -81,15 +85,27 @@ Rails.application.configure do
   # Only use :id for inspections in production.
   config.active_record.attributes_for_inspect = [ :id ]
 
-  # Enable DNS rebinding protection and other `Host` header attacks.
-  # config.hosts = [
-  #   "example.com",     # Allow requests from example.com
-  #   /.*\.example\.com/ # Allow requests from subdomains like `www.example.com`
-  # ]
-  #
-  # Skip DNS rebinding protection for the default health check endpoint.
-  # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
-   config.action_mailer.default_url_options = { host: 'https://fierce-caverns-42573-046cb6f9d5ea.herokuapp.com/'}
+   config.action_mailer.default_url_options = { host: 'https://ancient-anchorage-17143-89f06e220309.herokuapp.com/'}
+
+# config/environments/production.rb
+Rails.application.configure do
+
+
+  # Paperclip S3 config
+  config.paperclip_defaults = {
+    storage: :s3,
+    s3_credentials: {
+      bucket:            ENV.fetch('S3_BUCKET_NAME'),
+      access_key_id:     ENV.fetch('AWS_ACCESS_KEY_ID'),
+      secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
+      s3_region:         ENV.fetch('AWS_REGION')
+    }
+  }
+
+  Paperclip::Attachment.default_options[:s3_host_name] = 's3-us-east-1.amazonaws.com'
+##
 
 end
+# bump
+# bump
