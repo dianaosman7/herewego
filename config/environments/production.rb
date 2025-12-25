@@ -1,111 +1,49 @@
 require "active_support/core_ext/integer/time"
-##
-
-##
-
 
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
-
-  # Code is not reloaded between requests.
+  # Code is not reloaded between requests
   config.enable_reloading = false
-
-  # Eager load code on boot for better performance and memory savings (ignored by Rake tasks).
   config.eager_load = true
 
-  # Full error reports are disabled.
+  # Disable full error reports
   config.consider_all_requests_local = false
 
-  # Turn on fragment caching in view templates.
+  # Enable caching
   config.action_controller.perform_caching = true
-
-  # Cache assets for far-future expiry since they are all digest stamped.
-  config.public_file_server.headers = { "cache-control" => "public, max-age=#{1.year.to_i}" }
-
-  # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  # config.asset_host = "http://assets.example.com"
-
-  # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
-
-  config.active_storage.service = :amazon
-
-  # Assume all access to the app is happening through a SSL-terminating reverse proxy.
-  # config.assume_ssl = true
-
-  # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
-
-  # Skip http-to-https redirect for the default health check endpoint.
-  # config.ssl_options = { redirect: { exclude: ->(request) { request.path == "/up" } } }
-
-  # Log to STDOUT with the current request id as a default log tag.
-  config.log_tags = [ :request_id ]
-  config.logger   = ActiveSupport::TaggedLogging.logger(STDOUT)
-
-  # Change to "debug" to log everything (including potentially personally-identifiable information!).
-  config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
-
-  # Prevent health checks from clogging up the logs.
-  config.silence_healthcheck_path = "/up"
-
-  # Don't log any deprecations.
-  config.active_support.report_deprecations = false
-
-  # Replace the default in-process memory cache store with a durable alternative.
   config.cache_store = :solid_cache_store
 
-  # Replace the default in-process and non-durable queuing backend for Active Job.
+  # Serve static files if enabled by platform (Heroku)
+  config.public_file_server.enabled = ENV["RAILS_SERVE_STATIC_FILES"].present?
+  config.public_file_server.headers = {
+    "cache-control" => "public, max-age=#{1.year.to_i}"
+  }
+
+  # Logging
+  config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
+  config.log_tags = [:request_id]
+  config.logger = ActiveSupport::TaggedLogging.logger(STDOUT)
+
+  # I18n
+  config.i18n.fallbacks = true
+
+  # Active Job
   config.active_job.queue_adapter = :solid_queue
   config.solid_queue.connects_to = { database: { writing: :queue } }
 
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
+  # Active Storage (S3 for Heroku)
+  config.active_storage.service = :amazon
 
-  # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "example.com" }
-
-  # Specify outgoing SMTP server. Remember to add smtp/* credentials via bin/rails credentials:edit.
-  # config.action_mailer.smtp_settings = {
-  #   user_name: Rails.application.credentials.dig(:smtp, :user_name),
-  #   password: Rails.application.credentials.dig(:smtp, :password),
-  #   address: "smtp.example.com",
-  #   port: 587,
-  #   authentication: :plain
-  # }
-
-  # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
-  # the I18n.default_locale when a translation cannot be found).
-  config.i18n.fallbacks = true
-
-  # Do not dump schema after migrations.
-  config.active_record.dump_schema_after_migration = false
-
-  # Only use :id for inspections in production.
-  config.active_record.attributes_for_inspect = [ :id ]
-
-
-   config.action_mailer.default_url_options = { host: 'https://ancient-anchorage-17143-89f06e220309.herokuapp.com/'}
-
-# config/environments/production.rb
-Rails.application.configure do
-
-
-  # Paperclip S3 config
-  config.paperclip_defaults = {
-    storage: :s3,
-    s3_credentials: {
-      bucket:            ENV.fetch('S3_BUCKET_NAME'),
-      access_key_id:     ENV.fetch('AWS_ACCESS_KEY_ID'),
-      secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
-      s3_region:         ENV.fetch('AWS_REGION')
-    }
+  # Mailer
+  config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = {
+    host: "ancient-anchorage-17143-89f06e220309.herokuapp.com",
+    protocol: "https"
   }
 
-  Paperclip::Attachment.default_options[:s3_host_name] = 's3-us-east-1.amazonaws.com'
-##
+  # Security / noise reduction
+  config.active_support.report_deprecations = false
 
+  # Database
+  config.active_record.dump_schema_after_migration = false
+  config.active_record.attributes_for_inspect = [:id]
 end
-# bump
-# bump
