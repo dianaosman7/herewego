@@ -3,8 +3,14 @@
 <%= render @pin %>
 
 <div>
+
+  <% if @pin.user == current_user %>
+  <%= link_to "Edit", edit_pin_path(@pin) %> |
+<% end %>
+
   <%= link_to "Edit this pin", edit_pin_path(@pin) %> |
   <%= link_to "Back to pins", pins_path %>
 
-  <%= button_to "Destroy this pin", @pin, method: :delete %>
+<%= button_to "Destroy this pin", @pin,
+      data: { turbo_confirm: "Are you sure?" } %>
 </div>
