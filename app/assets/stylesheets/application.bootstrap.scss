@@ -1,58 +1,195 @@
-// Import Bootstrap first
+// ------------------------------------------------------
+// 1) IMPORTS
+// ------------------------------------------------------
 @import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons";
 
+// ------------------------------------------------------
+// 2) THEME TOKENS
+// ------------------------------------------------------
+:root {
+  --lux-dark-pink: #693360;
+  --lux-dark-pink-2: #8a4d68;
+  --lux-pink-light: #f8e6f2;
+  --lux-bg: #fef9fb;
+  --lux-card: #ffffff;
+  --lux-border: rgba(0, 0, 0, 0.08);
+  --lux-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+// ------------------------------------------------------
+// 3) GLOBAL
+// ------------------------------------------------------
+body {
+  background-color: var(--lux-bg);
+  font-family: "Red Hat Display", sans-serif;
+}
+
+// ------------------------------------------------------
+// 4) BUTTONS
+// ------------------------------------------------------
 .lux-btn-purple {
-  background-color: #693360 !important;
-  color: white !important;
+  background-color: var(--lux-dark-pink) !important;
+  color: #fff !important;
   border: none !important;
-  
+
   &:hover {
-    background-color: #8a4d68 !important;
-    color: white !important;
+    background-color: var(--lux-dark-pink-2) !important;
+    color: #fff !important;
   }
 }
 
-// Custom dark pink theme
-:root {
-  --lux-dark-pink: #693360;
-  --lux-pink-light: #f8e6f2;
+// Optional: make outline buttons feel more “lux”
+.btn-outline-secondary {
+  border-color: rgba(105, 51, 96, 0.35) !important;
+  color: var(--lux-dark-pink) !important;
+
+  &:hover {
+    background-color: rgba(105, 51, 96, 0.08) !important;
+  }
 }
 
-body {
-  background-color: #fef9fb;
-  font-family: 'Red Hat Display', sans-serif;
+.btn-outline-danger {
+  &:hover {
+    background-color: rgba(220, 53, 69, 0.08) !important;
+  }
 }
 
-// Custom navbar (reliable!)
+// ------------------------------------------------------
+// 5) NAVBAR
+// ------------------------------------------------------
 .lux-navbar {
   background-color: var(--lux-pink-light) !important;
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* optional spacing between items */
+  gap: 0.5rem;
 }
-  
-  .navbar-brand {
-    color: var(--lux-dark-pink) !important;
-    font-weight: bold;
-    font-size: 1.5rem;
-  }
-  
-  .nav-link {
-    color: var(--lux-dark-pink) !important;
-    font-weight: 600;
-    
-    &:hover {
-      color: #b0256a !important;
-      background-color: #ffe2ec;
-      border-radius: 6px;
-    }
-  }
 
+.navbar-brand {
+  color: var(--lux-dark-pink) !important;
+  font-weight: 800;
+  font-size: 1.5rem;
+}
 
-// Jumbotron
+.nav-link {
+  color: var(--lux-dark-pink) !important;
+  font-weight: 600;
+
+  &:hover {
+    color: #b0256a !important;
+    background-color: #ffe2ec;
+    border-radius: 6px;
+  }
+}
+
+// ------------------------------------------------------
+// 6) JUMBOTRON / HERO
+// ------------------------------------------------------
 .lux-jumbotron {
   background-color: var(--lux-pink-light);
   padding: 3rem 0;
   margin-bottom: 3rem;
+  border-radius: 18px;
+}
+
+// ------------------------------------------------------
+// 7) PINS (INDEX) GRID + CARD + BADGES
+// ------------------------------------------------------
+.pins-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.pin-card {
+  background: var(--lux-card);
+  border: 1px solid var(--lux-border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--lux-shadow);
+  transition: transform 120ms ease, box-shadow 120ms ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  }
+}
+
+.pin-media {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: #f6f6f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pin-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pin-empty {
+  color: #666;
+  font-size: 14px;
+}
+
+.pin-badges {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+}
+
+.badge-img {
+  color: var(--lux-dark-pink);
+}
+
+.badge-pdf {
+  color: #b0256a;
+}
+
+.badge-file {
+  color: #444;
+}
+
+.badge-none {
+  color: #777;
+}
+
+.pin-body {
+  padding: 12px 14px 14px;
+}
+
+.pin-desc {
+  margin: 0 0 6px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #1f1f1f;
+}
+
+.pin-meta {
+  margin: 0 0 10px;
+  font-size: 13px;
+  color: #666;
+}
+
+.pin-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
 }

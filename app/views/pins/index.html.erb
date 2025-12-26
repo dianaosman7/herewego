@@ -1,31 +1,52 @@
-<div class="pins">
+<div class="pins-grid">
   <% @pins.each do |pin| %>
-    <div class="pin">
-      <% if pin.image.attached? %>
-        <% if pin.image.image? %>
-          <%= link_to pin do %>
-            <%= image_tag pin.image.variant(resize_to_limit: [600, 600]), class: "pin-thumb" %>
+    <div class="pin-card">
+      <div class="pin-media">
+        <% if pin.image.attached? %>
+          <% if pin.image.image? %>
+            <%= link_to pin do %>
+              <%= image_tag pin.image.variant(resize_to_limit: [600, 600]),
+                            class: "pin-thumb",
+                            alt: (pin.description.presence || "Pin image") %>
+            <% end %>
+          <% else %>
+            <%= link_to url_for(pin.image), target: "_blank", rel: "noopener", class: "file-link" do %>
+              View file
+            <% end %>
           <% end %>
         <% else %>
-          <%= link_to "View file", url_for(pin.image), target: "_blank", rel: "noopener" %>
+          <div class="pin-empty">No file yet</div>
         <% end %>
-      <% else %>
-        <p>No file yet</p>
-      <% end %>
 
-      <p class="pin-desc">
-        <%= pin.description %><br/>
-        <%= pin.user&.name %>
-      </p>
+        <div class="pin-badges">
+          <% if pin.image.attached? %>
+            <% if pin.image.image? %>
+              <span class="badge badge-img">Image</span>
+            <% elsif pin.image.content_type == "application/pdf" %>
+              <span class="badge badge-pdf">PDF</span>
+            <% else %>
+              <span class="badge badge-file">File</span>
+            <% end %>
+          <% else %>
+            <span class="badge badge-none">No file</span>
+          <% end %>
+        </div>
+      </div>
 
-      <% if pin.user == current_user %>
-        <br/>
-        <%= link_to "Edit", edit_pin_path(pin) %>
+      <div class="pin-body">
+        <p class="pin-desc"><%= pin.description %></p>
+        <p class="pin-meta"><%= pin.user&.name %></p>
 
-<%= link_to "Destroy", pin,
-      data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-      class: "btn btn-sm btn-outline-danger" %>
-      <% end %>
+        <% if pin.user == current_user %>
+          <div class="pin-actions">
+            <%= link_to "Edit", edit_pin_path(pin), class: "btn btn-sm btn-outline-secondary" %>
+
+            <%= link_to "Destroy", pin,
+                  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                  class: "btn btn-sm btn-outline-danger" %>
+          </div>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
