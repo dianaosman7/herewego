@@ -38,7 +38,7 @@ gem "will_paginate", "~> 4.0"
 gem "bootstrap-will_paginate"
 
 # AWS (S3) — modern & compatible
-gem "aws-sdk-s3", "~> 1.160"
+gem "aws-sdk-s3", "~> 1.209"
 
 # --------------------
 # Authentication
