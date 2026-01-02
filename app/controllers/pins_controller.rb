@@ -4,9 +4,11 @@ class PinsController < ApplicationController
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /pins
-  def index
-    @pins = Pin.all
-  end
+def index
+  @pins = Pin
+            .order(created_at: :desc)
+            .paginate(page: params[:page], per_page: 6)
+end
 
   # GET /pins/1
   def show
@@ -50,7 +52,7 @@ class PinsController < ApplicationController
   private
 
   def set_pin
-    @pin = Pin.find(params.expect(:id))
+   @pin = Pin.find(params[:id])
   end
 
   def pin_params

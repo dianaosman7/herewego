@@ -1,0 +1,11 @@
+<% unless user_signed_in? %>
+  <div class="alert alert-light text-center mt-4">
+    👋 Want to post, comment, or save ideas?<br>
+    <strong>
+      <%= link_to "Log in", new_user_session_path %>
+      or
+      <%= link_to "Sign up", new_user_registration_path %>
+    </strong>
+  </div>
+<% end %>
+

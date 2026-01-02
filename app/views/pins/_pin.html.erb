@@ -1,24 +1,58 @@
-class Pin < ApplicationRecord
-  has_one_attached :image
+<div class="box">
+  <div class="pin-card">
+    <div class="pin-media">
+      <% if pin.image.attached? && pin.image.image? %>
+        <%= link_to pin do %>
+          <%= image_tag pin.image.variant(resize_to_limit: [700, 700]),
+                        class: "pin-thumb",
+                        loading: "lazy" %>
+        <% end %>
 
-  validate :image_must_be_allowed_type
+      <% elsif pin.image.attached? %>
+        <%= link_to url_for(pin.image),
+                    target: "_blank",
+                    rel: "noopener",
+                    class: "pin-file-link" do %>
+          View file
+        <% end %>
 
-  private
+      <% else %>
+        <div class="pin-empty">No file yet</div>
+      <% end %>
 
-  def image_must_be_allowed_type
-    return unless image.attached?
+      <div class="pin-badges">
+        <% if pin.image.attached? %>
+          <% ct = pin.image.blob.content_type %>
 
-    allowed = %w[
-      image/png
-      image/jpeg
-      image/jpg
-      image/webp
-      image/gif
-      application/pdf
-    ]
+          <% if ct&.start_with?("image/") %>
+            <span class="badge badge-img">Image</span>
+          <% elsif ct == "application/pdf" %>
+            <span class="badge badge-pdf">PDF</span>
+          <% else %>
+            <span class="badge badge-file"><%= (ct || "File").upcase %></span>
+          <% end %>
+        <% else %>
+          <span class="badge badge-none">No file</span>
+        <% end %>
+      </div>
+    </div>
 
-    unless allowed.include?(image.blob.content_type)
-      errors.add(:image, "must be an image (png/jpg/webp/gif) or a PDF")
-    end
-  end
-end
+    <div class="pin-body">
+      <div class="pin-desc"><%= pin.description %></div>
+      <div class="pin-meta"><%= pin.user&.name %></div>
+
+      <% if pin.user == current_user %>
+        <div class="pin-actions">
+          <%= link_to "Edit",
+                      edit_pin_path(pin),
+                      class: "btn btn-sm btn-outline-secondary" %>
+
+          <%= link_to "Destroy",
+                      pin_path(pin),
+                      data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                      class: "btn btn-sm btn-outline-danger" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

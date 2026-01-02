@@ -11,4 +11,7 @@ class HomecontrolController < ApplicationController
   def contact
   end
   
+  def start_here
+end
+  
 end

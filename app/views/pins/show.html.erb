@@ -1,16 +1,22 @@
-<% content_for :title, "Pin ##{@pin.id}" %>
+<% content_for :title, @pin.title.presence || "Pin" %>
 
-<%= render @pin %>
+<div class="container mt-4">
+  <%= render @pin %>
 
-<div>
+  <%= render "shared/login_to_interact" %>
 
-  <% if @pin.user == current_user %>
-  <%= link_to "Edit", edit_pin_path(@pin) %> |
-<% end %>
+  <div class="mt-4 d-flex gap-3">
+    <%= link_to "Back to pins", pins_path, class: "btn btn-outline-secondary" %>
 
-  <%= link_to "Edit this pin", edit_pin_path(@pin) %> |
-  <%= link_to "Back to pins", pins_path %>
+    <% if user_signed_in? && @pin.user == current_user %>
+      <%= link_to "Edit",
+                  edit_pin_path(@pin),
+                  class: "btn btn-outline-primary" %>
 
-<%= button_to "Destroy this pin", @pin,
-      data: { turbo_confirm: "Are you sure?" } %>
+      <%= link_to "Delete",
+                  pin_path(@pin),
+                  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
+                  class: "btn btn-outline-danger" %>
+    <% end %>
+  </div>
 </div>

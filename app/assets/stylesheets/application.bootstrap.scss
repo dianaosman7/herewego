@@ -1,195 +1,290 @@
-// ------------------------------------------------------
-// 1) IMPORTS
-// ------------------------------------------------------
-@import "bootstrap/scss/bootstrap";
-@import "bootstrap-icons/font/bootstrap-icons";
+/* =========================
+   ParentSpace Homepage UI
+   Black + Pink + Gold
+   Font: Aeonik Pro / Red Hat Display
+   ========================= */
 
-// ------------------------------------------------------
-// 2) THEME TOKENS
-// ------------------------------------------------------
-:root {
-  --lux-dark-pink: #693360;
-  --lux-dark-pink-2: #8a4d68;
-  --lux-pink-light: #f8e6f2;
-  --lux-bg: #fef9fb;
-  --lux-card: #ffffff;
-  --lux-border: rgba(0, 0, 0, 0.08);
-  --lux-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+:root{
+  --bg-main:#0b0b0e;
+  --bg-surface:rgba(255,255,255,0.04);
+  --bg-soft:rgba(255,255,255,0.07);
+
+  --text-main:rgba(255,255,255,0.92);
+  --text-muted:rgba(255,255,255,0.70);
+
+  --pink-soft:#f2b6d8;
+  --pink-deep:#d982b5;
+
+  --gold-soft:#e6c77b;
+  --gold-muted:#c9b06c;
+
+  --border-soft:rgba(255,255,255,0.12);
+  --radius-lg:20px;
+  --shadow-soft:0 24px 60px rgba(0,0,0,0.65);
 }
 
-// ------------------------------------------------------
-// 3) GLOBAL
-// ------------------------------------------------------
-body {
-  background-color: var(--lux-bg);
-  font-family: "Red Hat Display", sans-serif;
+html, body{
+  font-family:"Aeonik Pro","Red Hat Display",system-ui,-apple-system,sans-serif;
+  background:var(--bg-main);
+  color:var(--text-main);
+  font-size:18px;
 }
 
-// ------------------------------------------------------
-// 4) BUTTONS
-// ------------------------------------------------------
-.lux-btn-purple {
-  background-color: var(--lux-dark-pink) !important;
-  color: #fff !important;
-  border: none !important;
-
-  &:hover {
-    background-color: var(--lux-dark-pink-2) !important;
-    color: #fff !important;
-  }
+/* ---------- LAYOUT ---------- */
+.pp-container{
+  width:min(1120px, calc(100% - 40px));
+  margin-inline:auto;
 }
 
-// Optional: make outline buttons feel more “lux”
-.btn-outline-secondary {
-  border-color: rgba(105, 51, 96, 0.35) !important;
-  color: var(--lux-dark-pink) !important;
-
-  &:hover {
-    background-color: rgba(105, 51, 96, 0.08) !important;
-  }
+/* ---------- NAV ---------- */
+.pp-nav{
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(11,11,14,0.85);
+  border-bottom: 1px solid var(--border-soft);
+  backdrop-filter: blur(12px);
 }
 
-.btn-outline-danger {
-  &:hover {
-    background-color: rgba(220, 53, 69, 0.08) !important;
-  }
+.pp-nav__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 14px 0;
+  gap: 16px;
 }
 
-// ------------------------------------------------------
-// 5) NAVBAR
-// ------------------------------------------------------
-.lux-navbar {
-  background-color: var(--lux-pink-light) !important;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.navbar-brand {
-  color: var(--lux-dark-pink) !important;
-  font-weight: 800;
-  font-size: 1.5rem;
-}
-
-.nav-link {
-  color: var(--lux-dark-pink) !important;
-  font-weight: 600;
-
-  &:hover {
-    color: #b0256a !important;
-    background-color: #ffe2ec;
-    border-radius: 6px;
-  }
-}
-
-// ------------------------------------------------------
-// 6) JUMBOTRON / HERO
-// ------------------------------------------------------
-.lux-jumbotron {
-  background-color: var(--lux-pink-light);
-  padding: 3rem 0;
-  margin-bottom: 3rem;
-  border-radius: 18px;
-}
-
-// ------------------------------------------------------
-// 7) PINS (INDEX) GRID + CARD + BADGES
-// ------------------------------------------------------
-.pins-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 18px;
-  margin-top: 18px;
-}
-
-.pin-card {
-  background: var(--lux-card);
-  border: 1px solid var(--lux-border);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: var(--lux-shadow);
-  transition: transform 120ms ease, box-shadow 120ms ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
-  }
-}
-
-.pin-media {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  background: #f6f6f7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.pin-thumb {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.pin-empty {
-  color: #666;
-  font-size: 14px;
-}
-
-.pin-badges {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  display: flex;
-  gap: 8px;
-}
-
-.badge {
-  font-size: 12px;
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.10);
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(6px);
-}
-
-.badge-img {
-  color: var(--lux-dark-pink);
-}
-
-.badge-pdf {
-  color: #b0256a;
-}
-
-.badge-file {
-  color: #444;
-}
-
-.badge-none {
-  color: #777;
-}
-
-.pin-body {
-  padding: 12px 14px 14px;
-}
-
-.pin-desc {
-  margin: 0 0 6px;
+.pp-brand{
+  color: var(--text-main);
   font-weight: 700;
-  line-height: 1.25;
-  color: #1f1f1f;
+  text-decoration:none;
+  letter-spacing: 0.2px;
 }
 
-.pin-meta {
-  margin: 0 0 10px;
-  font-size: 13px;
-  color: #666;
+.pp-nav__right{
+  display:flex;
+  align-items:center;
+  gap: 18px;
 }
 
-.pin-actions {
-  display: flex;
+.pp-links{
+  display:flex;
+  align-items:center;
+  gap: 14px;
+}
+
+.pp-link{
+  color: var(--text-muted);
+  text-decoration:none;
+  font-weight: 500;
+  padding: 8px 10px;
+  border-radius: 12px;
+}
+.pp-link:hover{
+  color: var(--pink-soft);
+  background: rgba(242,182,216,0.10);
+}
+
+/* ---------- BUTTONS ---------- */
+.pp-actions{
+  display:flex;
+  align-items:center;
   gap: 10px;
-  align-items: center;
+}
+
+.pp-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-weight: 600;
+  text-decoration:none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.pp-btn--ghost{
+  color: var(--text-main);
+  background: transparent;
+  border-color: var(--border-soft);
+}
+.pp-btn--ghost:hover{
+  background: rgba(255,255,255,0.06);
+}
+
+.pp-btn--solid{
+  color: #0b0b0e;
+  background: linear-gradient(135deg, var(--pink-soft), var(--gold-soft));
+  box-shadow: 0 12px 40px rgba(242,182,216,0.25);
+}
+.pp-btn--solid:hover{
+  filter: brightness(1.05);
+}
+
+.pp-btn--lg{
+  padding: 12px 18px;
+  border-radius: 16px;
+}
+
+/* ---------- HERO ---------- */
+.pp-hero{
+  min-height: calc(100vh - 64px);
+  background:
+    radial-gradient(900px 420px at 20% 10%, rgba(242,182,216,0.14), transparent 60%),
+    radial-gradient(900px 420px at 80% 30%, rgba(230,199,123,0.12), transparent 60%),
+    var(--bg-main);
+  padding: 56px 0 70px;
+}
+
+.pp-hero__inner{
+  display:flex;
+  align-items:stretch;
+  gap: 28px;
+}
+
+.pp-hero__content{
+  flex: 1 1 640px;
+  padding: 24px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  background: rgba(255,255,255,0.03);
+  box-shadow: var(--shadow-soft);
+}
+
+.pp-kicker{
+  margin: 0 0 14px;
+  color: var(--gold-soft);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.pp-title{
+  margin: 0 0 18px;
+  font-size: clamp(28px, 3.2vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.3px;
+}
+
+.pp-body{
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+.pp-body p{
+  margin: 0 0 14px;
+}
+
+.pp-contrast{
+  padding: 14px 14px;
+  border-left: 3px solid var(--pink-deep);
+  background: rgba(242,182,216,0.08);
+  border-radius: 14px;
+  color: rgba(255,255,255,0.85);
+}
+
+.pp-bold{
+  color: rgba(255,255,255,0.92);
+  font-weight: 700;
+}
+
+.pp-ctaRow{
+  margin-top: 18px;
+  display:flex;
+  align-items:center;
+  gap: 12px;
   flex-wrap: wrap;
+}
+
+/* ---------- SIDE CARD ---------- */
+.pp-hero__card{
+  flex: 0 0 360px;
+  display:flex;
+}
+
+.pp-card{
+  width: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-soft);
+  background: rgba(255,255,255,0.035);
+  padding: 18px;
+  box-shadow: var(--shadow-soft);
+}
+
+.pp-card__top{
+  display:flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.pp-dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.25);
+}
+
+.pp-card__title{
+  margin: 0 0 10px;
+  color: var(--gold-soft);
+  font-weight: 600;
+}
+
+.pp-card__text{
+  margin: 0 0 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.pp-list{
+  margin: 0;
+  padding-left: 18px;
+  color: rgba(255,255,255,0.82);
+}
+
+.pp-list li{
+  margin: 8px 0;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 960px){
+  .pp-hero__inner{ flex-direction: column; }
+  .pp-hero__card{ flex: 1 1 auto; }
+}
+
+@media (max-width: 780px){
+  .pp-links{ display:none; }
+  .pp-nav__inner{ padding: 12px 0; }
+  .pp-hero{ padding-top: 34px; }
+  .pp-hero__content{ padding: 18px; }
+}
+
+
+/* Bootstrap-like jumbotron rhythm helpers */
+.pp-display{
+  margin-top: 0;
+}
+
+.pp-lead{
+  font-size: 1.1rem;
+  line-height: 1.55;
+}
+
+.pp-hr{
+  border: 0;
+  height: 1px;
+  margin: 18px 0 18px;
+  background: linear-gradient(
+    90deg,
+    rgba(242,182,216,0.0),
+    rgba(242,182,216,0.35),
+    rgba(230,199,123,0.35),
+    rgba(230,199,123,0.0)
+  );
+}
+
+.pp-main{
+  min-height: calc(100vh - 70px);
 }

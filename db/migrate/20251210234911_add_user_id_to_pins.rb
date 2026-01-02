@@ -1,6 +1,7 @@
 class AddUserIdToPins < ActiveRecord::Migration[8.1]
   def change
-    add_column :pins, :user_id, :integer
-    add_index :pins, :user_id
+    add_reference :pins, :user, null: false, foreign_key: true
   end
+##
+
 end

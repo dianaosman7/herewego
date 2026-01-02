@@ -34,6 +34,8 @@ gem "solid_cable"
 # --------------------
 gem "image_processing", "~> 1.2"
 gem "mini_magick"
+gem "will_paginate", "~> 4.0"
+gem "bootstrap-will_paginate"
 
 # AWS (S3) — modern & compatible
 gem "aws-sdk-s3", "~> 1.160"
@@ -53,7 +55,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 # --------------------
 group :development, :test do
   gem "debug", platforms: %i[mri windows], require: "debug/prelude"
-  gem "sqlite3", "~> 1.4"
+ gem "sqlite3", "~> 2.1"
   gem "brakeman", require: false
   gem "bundler-audit", require: false
   gem "rubocop-rails-omakase", require: false
@@ -61,6 +63,7 @@ end
 
 group :development do
   gem "web-console"
+  gem "foreman"
 end
 
 group :test do
@@ -74,3 +77,4 @@ end
 group :production do
   gem "pg"
 end
+

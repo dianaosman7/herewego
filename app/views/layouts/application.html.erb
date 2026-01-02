@@ -1,39 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Global Towns" %></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <title>Letspinterest</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <!-- Google Font: Red Hat Display -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- Google Font (fallback if Aeonik isn't loaded) -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>   <!-- KEEP ONLY ONE -->
+    <%= javascript_importmap_tags %>
   </head>
 
-  <body style="font-family: 'Red Hat Display', sans-serif; background-color: var(--lux-bg);">
+<body>
+  <header>
+    <%= render "homecontrol/navbar" %>
+  </header>
 
-    <main class="container my-5">
-
-      <nav class="navbar navbar-expand-lg lux-navbar">
-
-        <%= render 'homecontrol/brand' %>
-        <%= render 'homecontrol/navbar' %>
-
-      </nav>
-
-      <br/>
-
-      <div class="container">
-        <%= render 'homecontrol/flashmessage' %>
-        <%= yield %>
-      </div>
-
-    </main>
-
-  </body>
+  <main class="pp-main">
+    <%= render "homecontrol/flashmessage" %>
+    <%= yield %>
+  </main>
+</body>
 </html>

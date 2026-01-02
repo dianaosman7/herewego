@@ -46,4 +46,4 @@ Rails.application.configure do
   # Database
   config.active_record.dump_schema_after_migration = false
   config.active_record.attributes_for_inspect = [:id]
-end
+end# bump

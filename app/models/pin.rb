@@ -1,4 +1,5 @@
 class Pin < ApplicationRecord
+  belongs_to :user
   has_one_attached :image
 
   validate :image_must_be_allowed_type
@@ -9,16 +10,10 @@ class Pin < ApplicationRecord
     return unless image.attached?
 
     allowed = [
-      "image/png",
-      "image/jpeg",
-      "image/jpg",
-      "image/webp",
-      "image/gif",
+      "image/png", "image/jpeg", "image/jpg", "image/webp", "image/gif",
       "application/pdf"
     ]
 
-    unless allowed.include?(image.blob.content_type)
-      errors.add(:image, "must be an image (png/jpg/webp/gif) or a PDF")
-    end
+    errors.add(:image, "must be an image (png/jpg/webp/gif) or a PDF") unless allowed.include?(image.blob.content_type)
   end
 end

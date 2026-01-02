@@ -1,52 +1,19 @@
-<div class="pins-grid">
-  <% @pins.each do |pin| %>
-    <div class="pin-card">
-      <div class="pin-media">
-        <% if pin.image.attached? %>
-          <% if pin.image.image? %>
-            <%= link_to pin do %>
-              <%= image_tag pin.image.variant(resize_to_limit: [600, 600]),
-                            class: "pin-thumb",
-                            alt: (pin.description.presence || "Pin image") %>
-            <% end %>
-          <% else %>
-            <%= link_to url_for(pin.image), target: "_blank", rel: "noopener", class: "file-link" do %>
-              View file
-            <% end %>
-          <% end %>
-        <% else %>
-          <div class="pin-empty">No file yet</div>
-        <% end %>
-
-        <div class="pin-badges">
-          <% if pin.image.attached? %>
-            <% if pin.image.image? %>
-              <span class="badge badge-img">Image</span>
-            <% elsif pin.image.content_type == "application/pdf" %>
-              <span class="badge badge-pdf">PDF</span>
-            <% else %>
-              <span class="badge badge-file">File</span>
-            <% end %>
-          <% else %>
-            <span class="badge badge-none">No file</span>
-          <% end %>
-        </div>
+<% if @pins.any? %>
+  <div id="pins">
+    <% @pins.each do |pin| %>
+      <div class="box">
+        <%= render pin %>
       </div>
+    <% end %>
+  </div>
 
-      <div class="pin-body">
-        <p class="pin-desc"><%= pin.description %></p>
-        <p class="pin-meta"><%= pin.user&.name %></p>
-
-        <% if pin.user == current_user %>
-          <div class="pin-actions">
-            <%= link_to "Edit", edit_pin_path(pin), class: "btn btn-sm btn-outline-secondary" %>
-
-            <%= link_to "Destroy", pin,
-                  data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-                  class: "btn btn-sm btn-outline-danger" %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-</div>
+<%= render "shared/login_to_interact" %>
+  
+  <div class="d-flex justify-content-center mt-4">
+    <%= will_paginate @pins %>
+  </div>
+<% else %>
+  <div class="pin-empty text-center mt-4">
+    No pins yet.
+  </div>
+<% end %>
