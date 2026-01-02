@@ -1,290 +1,100 @@
-/* =========================
-   ParentSpace Homepage UI
-   Black + Pink + Gold
-   Font: Aeonik Pro / Red Hat Display
-   ========================= */
+/* application.bootstrap.scss */
 
-:root{
-  --bg-main:#0b0b0e;
-  --bg-surface:rgba(255,255,255,0.04);
-  --bg-soft:rgba(255,255,255,0.07);
+// 1. Google Font ─ Red Hat Display
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;600&display=swap");
 
-  --text-main:rgba(255,255,255,0.92);
-  --text-muted:rgba(255,255,255,0.70);
+// 2. Core Bootstrap 5 (variables first so we can override)
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/variables-dark"; // optional dark-mode vars
 
-  --pink-soft:#f2b6d8;
-  --pink-deep:#d982b5;
+// 3. Colour & font overrides
+$font-family-sans-serif: "Red Hat Display", sans-serif;
+$font-weight-normal: 400;
+$font-weight-bold: 500; // we never want real bold
 
-  --gold-soft:#e6c77b;
-  --gold-muted:#c9b06c;
+// main palette
+$body-bg: #000;
+$body-color: #fff;
+$primary: #ff4d94; // pink
+$secondary: #ffb86c; // gold-ish
+$light: #1f1f1f;
+$dark: #000;
 
-  --border-soft:rgba(255,255,255,0.12);
-  --radius-lg:20px;
-  --shadow-soft:0 24px 60px rgba(0,0,0,0.65);
-}
+// links & accents
+$link-color: $primary;
+$link-hover-color: $secondary;
 
-html, body{
-  font-family:"Aeonik Pro","Red Hat Display",system-ui,-apple-system,sans-serif;
-  background:var(--bg-main);
-  color:var(--text-main);
-  font-size:18px;
-}
+// buttons
+$btn-font-weight: 400;
+$btn-padding-y: 0.5rem;
+$btn-padding-x: 1.25rem;
+$btn-border-radius: 0.25rem;
 
-/* ---------- LAYOUT ---------- */
-.pp-container{
-  width:min(1120px, calc(100% - 40px));
-  margin-inline:auto;
-}
+// 4. Bring in the rest of Bootstrap
+@import "bootstrap/scss/bootstrap";
 
-/* ---------- NAV ---------- */
-.pp-nav{
-  position: sticky;
-  top: 0;
-  z-index: 20;
-  background: rgba(11,11,14,0.85);
-  border-bottom: 1px solid var(--border-soft);
-  backdrop-filter: blur(12px);
-}
+// 5. Bootstrap-Icons
+@import "bootstrap-icons/font/bootstrap-icons";
 
-.pp-nav__inner{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding: 14px 0;
-  gap: 16px;
-}
-
-.pp-brand{
-  color: var(--text-main);
-  font-weight: 700;
-  text-decoration:none;
+// 6. Global fine-tuning
+body {
+  font-weight: 400;
   letter-spacing: 0.2px;
 }
 
-.pp-nav__right{
-  display:flex;
-  align-items:center;
-  gap: 18px;
+a {
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
 }
 
-.pp-links{
-  display:flex;
-  align-items:center;
-  gap: 14px;
+// 7. Jumbotron
+.jumbotron {
+  background-color: $light;
+  color: $body-color;
+  border: 1px solid rgba($primary, 0.2);
+  border-radius: 0.5rem;
 }
 
-.pp-link{
-  color: var(--text-muted);
-  text-decoration:none;
-  font-weight: 500;
-  padding: 8px 10px;
-  border-radius: 12px;
-}
-.pp-link:hover{
-  color: var(--pink-soft);
-  background: rgba(242,182,216,0.10);
+// 8. Buttons
+.btn-primary {
+  background-color: $primary;
+  border-color: $primary;
+  &:hover {
+    background-color: darken($primary, 8%);
+    border-color: darken($primary, 8%);
+  }
 }
 
-/* ---------- BUTTONS ---------- */
-.pp-actions{
-  display:flex;
-  align-items:center;
-  gap: 10px;
+.btn-outline-primary {
+  color: $primary;
+  border-color: $primary;
+  &:hover {
+    background-color: $primary;
+    border-color: $primary;
+  }
 }
 
-.pp-btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  border-radius: 14px;
-  padding: 10px 14px;
-  font-weight: 600;
-  text-decoration:none;
-  border: 1px solid transparent;
-  white-space: nowrap;
+// 9. Cards / forms (optional starter)
+.card {
+  background-color: $light;
+  border: 1px solid rgba($primary, 0.15);
+}
+## 
+
+.form-control,
+.form-select {
+  background-color: $light;
+  border: 1px solid rgba($secondary, 0.3);
+  color: $body-color;
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 0.2rem rgba($primary, 0.25);
+  }
 }
 
-.pp-btn--ghost{
-  color: var(--text-main);
-  background: transparent;
-  border-color: var(--border-soft);
-}
-.pp-btn--ghost:hover{
-  background: rgba(255,255,255,0.06);
-}
+// 10. Component partials (create when needed)
+// @import "components/navbar";
+// @import "components/footer";
 
-.pp-btn--solid{
-  color: #0b0b0e;
-  background: linear-gradient(135deg, var(--pink-soft), var(--gold-soft));
-  box-shadow: 0 12px 40px rgba(242,182,216,0.25);
-}
-.pp-btn--solid:hover{
-  filter: brightness(1.05);
-}
-
-.pp-btn--lg{
-  padding: 12px 18px;
-  border-radius: 16px;
-}
-
-/* ---------- HERO ---------- */
-.pp-hero{
-  min-height: calc(100vh - 64px);
-  background:
-    radial-gradient(900px 420px at 20% 10%, rgba(242,182,216,0.14), transparent 60%),
-    radial-gradient(900px 420px at 80% 30%, rgba(230,199,123,0.12), transparent 60%),
-    var(--bg-main);
-  padding: 56px 0 70px;
-}
-
-.pp-hero__inner{
-  display:flex;
-  align-items:stretch;
-  gap: 28px;
-}
-
-.pp-hero__content{
-  flex: 1 1 640px;
-  padding: 24px;
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-lg);
-  background: rgba(255,255,255,0.03);
-  box-shadow: var(--shadow-soft);
-}
-
-.pp-kicker{
-  margin: 0 0 14px;
-  color: var(--gold-soft);
-  font-weight: 600;
-  letter-spacing: 0.3px;
-}
-
-.pp-title{
-  margin: 0 0 18px;
-  font-size: clamp(28px, 3.2vw, 44px);
-  line-height: 1.1;
-  letter-spacing: -0.3px;
-}
-
-.pp-body{
-  color: var(--text-muted);
-  font-size: 1.05rem;
-  line-height: 1.65;
-}
-
-.pp-body p{
-  margin: 0 0 14px;
-}
-
-.pp-contrast{
-  padding: 14px 14px;
-  border-left: 3px solid var(--pink-deep);
-  background: rgba(242,182,216,0.08);
-  border-radius: 14px;
-  color: rgba(255,255,255,0.85);
-}
-
-.pp-bold{
-  color: rgba(255,255,255,0.92);
-  font-weight: 700;
-}
-
-.pp-ctaRow{
-  margin-top: 18px;
-  display:flex;
-  align-items:center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-/* ---------- SIDE CARD ---------- */
-.pp-hero__card{
-  flex: 0 0 360px;
-  display:flex;
-}
-
-.pp-card{
-  width: 100%;
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-soft);
-  background: rgba(255,255,255,0.035);
-  padding: 18px;
-  box-shadow: var(--shadow-soft);
-}
-
-.pp-card__top{
-  display:flex;
-  gap: 8px;
-  margin-bottom: 14px;
-}
-
-.pp-dot{
-  width: 10px;
-  height: 10px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.25);
-}
-
-.pp-card__title{
-  margin: 0 0 10px;
-  color: var(--gold-soft);
-  font-weight: 600;
-}
-
-.pp-card__text{
-  margin: 0 0 14px;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-.pp-list{
-  margin: 0;
-  padding-left: 18px;
-  color: rgba(255,255,255,0.82);
-}
-
-.pp-list li{
-  margin: 8px 0;
-}
-
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 960px){
-  .pp-hero__inner{ flex-direction: column; }
-  .pp-hero__card{ flex: 1 1 auto; }
-}
-
-@media (max-width: 780px){
-  .pp-links{ display:none; }
-  .pp-nav__inner{ padding: 12px 0; }
-  .pp-hero{ padding-top: 34px; }
-  .pp-hero__content{ padding: 18px; }
-}
-
-
-/* Bootstrap-like jumbotron rhythm helpers */
-.pp-display{
-  margin-top: 0;
-}
-
-.pp-lead{
-  font-size: 1.1rem;
-  line-height: 1.55;
-}
-
-.pp-hr{
-  border: 0;
-  height: 1px;
-  margin: 18px 0 18px;
-  background: linear-gradient(
-    90deg,
-    rgba(242,182,216,0.0),
-    rgba(242,182,216,0.35),
-    rgba(230,199,123,0.35),
-    rgba(230,199,123,0.0)
-  );
-}
-
-.pp-main{
-  min-height: calc(100vh - 70px);
-}
+##/* bump */

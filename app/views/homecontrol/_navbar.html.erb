@@ -1,24 +1,27 @@
-<nav class="pp-nav">
-  <div class="pp-container pp-nav__inner">
+<!-- app/views/shared/_navbar.html.erb -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+  <div class="container-fluid">
+    <%= link_to "ParentSpace", root_path, class: "navbar-brand fw-bold" %>
 
-    <!-- Brand -->
-    <a class="pp-brand" href="<%= root_path %>">
-      ParentSpace
-    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <!-- Right side -->
-    <div class="pp-nav__right">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item"><%= link_to "Learn",   learn_path,   class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Explore", explore_path, class: "nav-link" %></li>
+        <li class="nav-item"><%= link_to "Connect", connect_path, class: "nav-link" %></li>
 
-      <!-- Links -->
-      <div class="pp-links">
-     <a class="pp-link" href="<%= start_here_path %>">Start Here</a>
-<a class="pp-link" href="<%= services_path %>">Learn</a>
-<a class="pp-link" href="<%= contact_path %>">Connect</a>
-
-<a class="pp-btn pp-btn--ghost" href="<%= new_user_registration_path %>">Join</a>
-<a class="pp-btn pp-btn--solid" href="<%= new_user_session_path %>">Log in</a>
-      </div>
-
+        <% if user_signed_in? %>
+          <li class="nav-item"><%= link_to "Logout", logout_path, method: :delete, class: "nav-link" %></li>
+        <% else %>
+          <li class="nav-item"><%= link_to "Login / Join", login_path, class: "nav-link" %></li>
+        <% end %>
+      </ul>
     </div>
   </div>
 </nav>
+
+##

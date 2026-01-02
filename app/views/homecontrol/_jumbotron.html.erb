@@ -1,78 +1,26 @@
-<section class="pp-hero">
-  <div class="pp-container">
-    <div class="pp-hero__inner">
+<!-- app/views/homecontrol/_jumbotron.html.erb -->
+<div class="p-5 mb-4 bg-light rounded-3">
+  <div class="container-fluid py-5 text-center">
+    <h1 class="display-5 fw-bold">
+      Welcome, parents raised by parents who were also guessing.
+    </h1>
 
-      <!-- LEFT: Jumbotron content (Bootstrap rhythm) -->
-      <div class="pp-hero__content">
+    <p class="col-md-10 col-lg-8 mx-auto fs-5 mb-4">
+      Parenting is the most important job in the world — and somehow the only one with no degree, no training, and no onboarding.<br>
+      No manual. No certificate. Just... good luck.
+    </p>
 
-        <!-- like: p.lead (kicker) -->
-        <p class="pp-kicker pp-lead">
-          Welcome, parents raised by parents who were also guessing.
-        </p>
+    <p class="col-md-10 col-lg-8 mx-auto text-muted mb-4">
+      This space exists to break that cycle — without guilt, shame, or perfection pressure.<br>
+      Less “this is how my parents did it.”<br>
+      Less “I hated it... yet here I am doing the same.”<br>
+      <strong>More parenting that actually works.</strong><br>
+      For parents brave enough to unlearn before teaching.
+    </p>
 
-        <!-- like: h1.display-4 -->
-        <h1 class="pp-title pp-display">
-          Parenting is the most important job in the world — and somehow the only one with no degree, no training, and no onboarding.
-        </h1>
-
-        <!-- like: hr.my-4 -->
-        <hr class="pp-hr">
-
-        <!-- like: p (supporting) -->
-        <div class="pp-body">
-          <p>No manual. No certificate. Just... good luck.</p>
-
-          <p>
-            And yet we’re expected to raise emotionally healthy humans using methods we swore we’d never repeat.
-          </p>
-
-          <p>
-            This space exists to break that cycle — without guilt, shame, or perfection pressure.
-          </p>
-
-          <!-- emphasized block (your original contrast) -->
-          <p class="pp-contrast">
-            Less “this is how my parents did it.”<br>
-            Less “I hated it... yet here I am doing the same.”<br>
-            More parenting that actually works.
-          </p>
-
-          <p class="pp-bold">
-            For parents brave enough to unlearn before teaching.
-          </p>
-        </div>
-
-        <!-- like: p.lead wrapping the button -->
-        <p class="pp-lead pp-ctaRow">
-          <a class="pp-btn pp-btn--solid pp-btn--lg" href="#">
-            Enter Your Safe Space
-          </a>
-        </p>
-      </div>
-
-      <!-- RIGHT: Optional card -->
-      <aside class="pp-hero__card" aria-label="Intro card">
-        <div class="pp-card">
-          <div class="pp-card__top">
-            <span class="pp-dot"></span>
-            <span class="pp-dot"></span>
-            <span class="pp-dot"></span>
-          </div>
-
-          <h3 class="pp-card__title">A calmer way to parent.</h3>
-
-          <p class="pp-card__text">
-            Learn patterns. Break loops. Practice tools that work in real life — not just in books.
-          </p>
-
-          <ul class="pp-list">
-            <li>Practical scripts</li>
-            <li>Emotion coaching</li>
-            <li>Community support</li>
-          </ul>
-        </div>
-      </aside>
-
-    </div>
+    <%= link_to "Enter your safe space", start_here_path, class: "btn btn-primary btn-lg me-3" %>
+    <%= link_to "Start here", start_here_path, class: "btn btn-outline-primary btn-lg" %>
   </div>
-</section>
+</div>
+
+##
